@@ -72,7 +72,7 @@ public class Complex {
      * @return the complex <code>real + 0 i</code>
      */
     public static Complex real(double real) {
-        return new Complex(0, real);
+        return new Complex(real, 0);
     }
 
     /**
@@ -111,7 +111,7 @@ public class Complex {
      * @return the complex number <code>this - subtrahend</code>
      */
     Complex subtract(Complex subtrahend) {
-        return new Complex(this.imaginary - subtrahend.imaginary, this.real - subtrahend.real);
+        return new Complex(this.real - subtrahend.real, this.imaginary - subtrahend.imaginary);
     }
 
     /**
@@ -122,8 +122,8 @@ public class Complex {
      */
     Complex multiply(Complex factor) {
         return new Complex(
-                this.real * factor.real + this.imaginary * factor.imaginary,
-                this.real * factor.imaginary - this.imaginary * factor.real
+                this.real * factor.real - this.imaginary * factor.imaginary,
+                this.real * factor.imaginary + this.imaginary * factor.real
         );
     }
 
@@ -133,7 +133,7 @@ public class Complex {
      * @return <code>||this|| ** 2</code>
      */
     double squaredModulus() {
-        return real * real + imaginary * imaginary;
+        return this.real * this.real + this.imaginary * this.imaginary;
     }
 
     /**
@@ -152,12 +152,17 @@ public class Complex {
      * @return a complex number <code>c</code> such that <code>this * c = 1</code>
      */
     Complex reciprocal() {
-        if (this.equals(ONE)){
-            return ONE;
-            //throw new ArithmeticException("divide by zero");
+
+        // Bug étrange, demander au prof.
+        /*if(this.equals(this.ZERO))*/
+        if(this.real == ZERO.real && this.imaginary == ZERO.imaginary){
+            throw new ArithmeticException("divide by zero");
         }
-        double m = squaredModulus();
-        return new Complex(real / m, imaginary / m);
+
+        Complex conjugate = this.conjugate();
+
+        double m = this.squaredModulus();
+        return new Complex(conjugate.real / m, conjugate.imaginary / m);
     }
 
     /**
