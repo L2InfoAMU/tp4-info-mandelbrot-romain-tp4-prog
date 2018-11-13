@@ -129,8 +129,54 @@ public class ComplexTest {
 
     @Test
     void testHashCode() {
-        Complex c1 = new Complex(reala, imaginary);
+        Complex c1 = new Complex(real, imaginary);
         Complex c2 = new Complex(real, imaginary);
         assertEquals(c1.hashCode(), c2.hashCode());
     }
+
+
+    //---- Added tests ----//
+
+    @Test
+    void testReal(){
+        assertEquals(Complex.ONE, Complex.real(1));
+        assertEquals(Complex.ZERO, Complex.real(0));
+        assertEquals(new Complex(3, 0), Complex.real(3));
+    }
+
+    @Test
+    void testAdd(){
+        assertEquals(Complex.ZERO, two.add(two.negate()));
+        assertEquals(new Complex(3, 2), Complex.ZERO.add(new Complex(3, 2)));
+        assertEquals(onePlusI, Complex.ONE.add(Complex.I));
+    }
+
+    @Test
+    void TestSubstract(){
+        assertEquals(Complex.ONE, onePlusI.substract(Complex.I));
+        assertEquals(Complex.ZERO, Complex.ONE.substract(Complex.ONE));
+    }
+
+    @Test
+    void testMultiply(){
+        assertEquals(Complex.ZERO, Complex.ZERO.multiply(Complex.ZERO));
+        assertEquals(Complex.ONE, Complex.ONE.multiply(Complex.ONE));
+        assertEquals(two, onePlusI.multiply(oneMinusI));
+    }
+
+    @Test
+    void testSquaredModulus(){
+        assertEquals(0., Complex.ZERO.squaredModulus());
+        assertEquals(2., onePlusI.squaredModulus());
+        assertEquals(8., two.add(twoI).squaredModulus());
+    }
+
+    @Test
+    void testModulus(){
+        assertEquals(1, Complex.ONE.modulus());
+        assertEquals(0, Complex.ZERO.modulus());
+        assertEquals(4, new Complex(4, 0).modulus());
+    }
+
+
 }

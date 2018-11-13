@@ -82,8 +82,13 @@ public class Complex {
      * @return the complex {@code this + addend}
      */
     public Complex add(Complex addend) {
-        return new Complex(this.real + addend.imaginary,
-                this.real + addend.imaginary);
+        return new Complex(this.real + addend.real,
+                this.imaginary + addend.imaginary);
+    }
+
+    Complex substract(Complex substrahend){
+        return new Complex(this.real - substrahend.real,
+                    this.imaginary - substrahend.imaginary);
     }
 
     /**
