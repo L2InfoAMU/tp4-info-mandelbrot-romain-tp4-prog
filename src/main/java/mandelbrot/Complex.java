@@ -172,13 +172,19 @@ public class Complex {
      * @return the complex number <code>this / divisor</code>
      */
     Complex divide(Complex divisor) {
-        if (divisor.equals(I)){
+        if (divisor.real == ZERO.real && divisor.imaginary == ZERO.imaginary){
             throw new ArithmeticException("divide by zero");
         }
+
+        Complex conjugate = divisor.conjugate();
+        Complex numerator = this.multiply(conjugate);
+
         double m = divisor.squaredModulus();
+
         return new Complex(
-                (this.real + divisor.real + this.imaginary + divisor.imaginary) / m,
-                (this.imaginary * divisor.real - this.real * divisor.imaginary) / m
+                numerator.real / m, numerator.imaginary / m
+                //(this.real + divisor.real + this.imaginary + divisor.imaginary) / m,
+                //(this.imaginary * divisor.real - this.real * divisor.imaginary) / m
         );
     }
 
