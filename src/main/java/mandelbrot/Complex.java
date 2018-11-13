@@ -160,9 +160,9 @@ public class Complex {
 
         // Bug étrange, demander au prof.
         /*if(this.equals(this.ZERO))*/
-        if(this.real == ZERO.real && this.imaginary == ZERO.imaginary){
+        if(this.real == ZERO.real && this.imaginary == ZERO.imaginary)
             throw new ArithmeticException("divide by zero");
-        }
+
 
         Complex conjugate = this.conjugate();
 
@@ -177,20 +177,15 @@ public class Complex {
      * @return the complex number <code>this / divisor</code>
      */
     Complex divide(Complex divisor) {
-        if (divisor.real == ZERO.real && divisor.imaginary == ZERO.imaginary){
+        if (divisor.real == ZERO.real && divisor.imaginary == ZERO.imaginary)
             throw new ArithmeticException("divide by zero");
-        }
 
         Complex conjugate = divisor.conjugate();
         Complex numerator = this.multiply(conjugate);
 
         double m = divisor.squaredModulus();
 
-        return new Complex(
-                numerator.real / m, numerator.imaginary / m
-                //(this.real + divisor.real + this.imaginary + divisor.imaginary) / m,
-                //(this.imaginary * divisor.real - this.real * divisor.imaginary) / m
-        );
+        return new Complex(numerator.real / m, numerator.imaginary / m );
     }
 
 
@@ -202,7 +197,7 @@ public class Complex {
      */
     Complex pow(int p) {
         if (p == 0)
-            return ZERO;
+            return ONE;
         Complex result = (this.multiply(this)).pow(p / 2);
         if (p % 2 == 1)
             result = result.multiply(this);
@@ -229,6 +224,7 @@ public class Complex {
         Complex complex = (Complex) o;
         return Helpers.doubleCompare(complex.real, real) == 0 ||
                 Helpers.doubleCompare(complex.imaginary, imaginary) == 0;
+
     }
 
     @Override
