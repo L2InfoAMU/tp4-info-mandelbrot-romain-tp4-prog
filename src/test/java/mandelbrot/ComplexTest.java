@@ -129,7 +129,7 @@ public class ComplexTest {
 
     @Test
     void testHashCode() {
-        Complex c1 = new Complex(reala, imaginary);
+        Complex c1 = new Complex(real, imaginary);
         Complex c2 = new Complex(real, imaginary);
         assertEquals(c1.hashCode(), c2.hashCode());
     }
