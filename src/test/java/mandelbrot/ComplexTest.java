@@ -193,5 +193,7 @@ public class ComplexTest {
     void testEquals() {
         assertTrue(two.equals(two));
         assertTrue(Complex.ONE.equals(new Complex(1, 0)));
+        assertFalse(Complex.ONE.equals(Complex.I));
+        assertTrue(Complex.ONE.equals(new Complex(1, 0)));
     }
 }

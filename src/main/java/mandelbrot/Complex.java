@@ -97,7 +97,7 @@ public class Complex {
      * @return A complex <code>c</code> such that <code>this + c = 0</code>
      */
     Complex negate() {
-        return new Complex(-this.real, this.imaginary);
+        return new Complex(-this.real, -this.imaginary);
     }
 
     /**
@@ -211,7 +211,7 @@ public class Complex {
      * @return the complex number <code>lambda * this</code>
      */
     public Complex scale(double lambda) {
-        return new Complex(lambda * real, lambda + imaginary);
+        return new Complex(lambda * real, lambda * imaginary);
     }
 
 
@@ -222,7 +222,7 @@ public class Complex {
         if (o == null || getClass() != o.getClass())
             return false;
         Complex complex = (Complex) o;
-        return Helpers.doubleCompare(complex.real, real) == 0 ||
+        return Helpers.doubleCompare(complex.real, real) == 0 &&
                 Helpers.doubleCompare(complex.imaginary, imaginary) == 0;
 
     }
